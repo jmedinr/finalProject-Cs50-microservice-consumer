@@ -3,9 +3,11 @@ package com.santiagoposadag.cs50.receiverconsumer.helpers;
 import com.santiagoposadag.cs50.receiverconsumer.collections.BoughtCryptoCurrency;
 import com.santiagoposadag.cs50.receiverconsumer.collections.CryptoCurrency;
 import com.santiagoposadag.cs50.receiverconsumer.collections.SoldCryptoCurrency;
+import com.santiagoposadag.cs50.receiverconsumer.collections.UserCurrency;
 import com.santiagoposadag.cs50.receiverconsumer.dto.BoughtCryptoCurrencyDto;
 import com.santiagoposadag.cs50.receiverconsumer.dto.CryptoCurrencyDto;
 import com.santiagoposadag.cs50.receiverconsumer.dto.SoldCryptoCurrencyDto;
+import com.santiagoposadag.cs50.receiverconsumer.dto.UserCurrencyDto;
 import org.springframework.stereotype.Component;
 
 import java.util.function.Function;
@@ -58,6 +60,19 @@ public class CryptoCurrencyMappers {
         };
     }
 
+    public Function<UserCurrency, UserCurrencyDto> fromUserEntityToDto(){
+        return user -> {
+            var userCurrencyDto = new UserCurrencyDto();
+            userCurrencyDto.setId(user.getId());
+            userCurrencyDto.setName(user.getName());
+            userCurrencyDto.setLastname(user.getLastname());
+            userCurrencyDto.setDni(user.getDni());
+            userCurrencyDto.setRoutingKey(user.getRoutingKey());
+            return userCurrencyDto;
+        };
+    }
+
+
     public Function<CryptoCurrencyDto, CryptoCurrency> fromGeneralDtoToEntity(){
         return crypto ->{
             var cryptoCurrency = new CryptoCurrency();
@@ -100,6 +115,18 @@ public class CryptoCurrencyMappers {
             soldCryptoCurrency.setUserId(crypto.getUserId());
             soldCryptoCurrency.setRoutingKey(crypto.getRoutingKey());
             return soldCryptoCurrency;
+        };
+    }
+
+    public Function<UserCurrencyDto, UserCurrency> fromUserDtoToEntity(){
+        return user -> {
+            var userCurrency = new UserCurrency();
+            userCurrency.setId(user.getId());
+            userCurrency.setName(user.getName());
+            userCurrency.setLastname(user.getLastname());
+            userCurrency.setDni(user.getDni());
+            userCurrency.setRoutingKey(user.getRoutingKey());
+            return userCurrency;
         };
     }
 }
