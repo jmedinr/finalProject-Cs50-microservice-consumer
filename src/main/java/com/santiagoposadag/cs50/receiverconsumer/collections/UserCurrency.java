@@ -15,7 +15,7 @@ import java.io.Serializable;
 @Document
 public class UserCurrency implements Serializable {
     @Id
-    private String Id;
+    private String userId;
 
     private String name;
     private String lastname;

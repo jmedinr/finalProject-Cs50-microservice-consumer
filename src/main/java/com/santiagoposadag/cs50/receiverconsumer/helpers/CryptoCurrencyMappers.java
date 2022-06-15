@@ -63,7 +63,7 @@ public class CryptoCurrencyMappers {
     public Function<UserCurrency, UserCurrencyDto> fromUserEntityToDto(){
         return user -> {
             var userCurrencyDto = new UserCurrencyDto();
-            userCurrencyDto.setId(user.getId());
+            userCurrencyDto.setUserId(user.getUserId());
             userCurrencyDto.setName(user.getName());
             userCurrencyDto.setLastname(user.getLastname());
             userCurrencyDto.setDni(user.getDni());
@@ -121,7 +121,7 @@ public class CryptoCurrencyMappers {
     public Function<UserCurrencyDto, UserCurrency> fromUserDtoToEntity(){
         return user -> {
             var userCurrency = new UserCurrency();
-            userCurrency.setId(user.getId());
+            userCurrency.setUserId(user.getUserId());
             userCurrency.setName(user.getName());
             userCurrency.setLastname(user.getLastname());
             userCurrency.setDni(user.getDni());
