@@ -4,9 +4,11 @@ package com.santiagoposadag.cs50.receiverconsumer.routers;
 import com.santiagoposadag.cs50.receiverconsumer.dto.BoughtCryptoCurrencyDto;
 import com.santiagoposadag.cs50.receiverconsumer.dto.CryptoCurrencyDto;
 import com.santiagoposadag.cs50.receiverconsumer.dto.SoldCryptoCurrencyDto;
+import com.santiagoposadag.cs50.receiverconsumer.dto.UserCurrencyDto;
 import com.santiagoposadag.cs50.receiverconsumer.usecases.GetAllActionsFromAUserUseCase;
 import com.santiagoposadag.cs50.receiverconsumer.usecases.GetBuyActionsFromAUserUseCase;
 import com.santiagoposadag.cs50.receiverconsumer.usecases.GetSellActionsFromAUserUseCase;
+import com.santiagoposadag.cs50.receiverconsumer.usecases.GetUsersActionsFromAUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
@@ -57,6 +59,16 @@ public class QueryRouter {
         );
     }
 
-
+    @Bean
+    public RouterFunction<ServerResponse> getUsersActionsByUserId(GetUsersActionsFromAUseCase getUsersActionsFromAUseCase){
+        return route(GET("/getUsersActions/{userId}"),
+                request -> ServerResponse.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(BodyInserters.fromPublisher(
+                                getUsersActionsFromAUseCase.apply(request.pathVariable("userId")),
+                                UserCurrencyDto.class
+                        ))
+        );
+    }
 
 }

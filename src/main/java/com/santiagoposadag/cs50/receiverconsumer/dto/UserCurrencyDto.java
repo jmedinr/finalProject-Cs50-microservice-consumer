@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class UserCurrencyDto {
 
-    private String Id;
+    private String userId;
     private String name;
     private String lastname;
     private String dni;
